@@ -3,6 +3,7 @@
     <dimen name="hairline">1px</dimen>
     <dimen name="margin_xxxx_small">2dp</dimen>
     <dimen name="margin_xxx_small">3dp</dimen>
+    <dimen name="margin_xxX_small">4dp</dimen>
     <dimen name="margin_xx_small">5dp</dimen>
     <dimen name="margin_x_small">7dp</dimen>
     <dimen name="margin_small">10dp</dimen>
@@ -23,4 +24,8 @@
 
     //Corner radius
     <dimen name="bottom_sheet_dialog_corner_radius">10dp</dimen>
+    <dimen name="card_view_corner_radius">5dp</dimen>
+
+    //Alpha
+    <dimen name="card_view_alpha" >0.8</dimen>
 </resources>

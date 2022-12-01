@@ -22,12 +22,12 @@ class MainAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder {
         return RecyclerItemViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_main_recyclerview_item, parent, false) as View
+                .inflate(R.layout.activity_main_recyclerview_item, parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
-        holder.bind(data.get(position))
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {

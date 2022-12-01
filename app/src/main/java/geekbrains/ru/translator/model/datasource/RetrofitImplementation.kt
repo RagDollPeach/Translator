@@ -1,7 +1,7 @@
 package geekbrains.ru.translator.model.datasource
 
 import geekbrains.ru.translator.model.data.DataModel
-import geekbrains.ru.translator.view.main.MyApp
+import geekbrains.ru.translator.App
 import io.reactivex.Observable
 import okhttp3.Interceptor
 
@@ -12,6 +12,6 @@ class RetrofitImplementation : DataSource<List<DataModel>> {
     }
 
     private fun getService(interceptor: Interceptor): ApiService {
-        return MyApp.createRetrofit(interceptor).create(ApiService::class.java)
+        return App.createRetrofit(interceptor).create(ApiService::class.java)
     }
 }

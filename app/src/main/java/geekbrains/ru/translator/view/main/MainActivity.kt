@@ -5,14 +5,12 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import geekbrains.ru.translator.App
 import geekbrains.ru.translator.R
 import geekbrains.ru.translator.databinding.ActivityMainBinding
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.model.data.DataModel
-import geekbrains.ru.translator.presenter.MainPresenterImpl
-import geekbrains.ru.translator.presenter.Presenter
 import geekbrains.ru.translator.view.base.BaseActivity
-import geekbrains.ru.translator.view.base.View
 import geekbrains.ru.translator.view.main.adapter.MainAdapter
 
 class MainActivity : BaseActivity<AppState>() {
@@ -27,10 +25,6 @@ class MainActivity : BaseActivity<AppState>() {
             }
         }
 
-    override fun createPresenter(): Presenter<AppState, View> {
-        return MainPresenterImpl()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -40,7 +34,7 @@ class MainActivity : BaseActivity<AppState>() {
             searchDialogFragment.setOnSearchClickListener(object :
                 SearchDialogFragment.OnSearchClickListener {
                 override fun onClick(searchWord: String) {
-                    presenter.getData(searchWord, true)
+                    App.presenter.getData(searchWord, true)
                 }
             })
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
@@ -86,26 +80,26 @@ class MainActivity : BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            presenter.getData("hi", true)
+            App.presenter.getData("hi", true)
         }
     }
 
     private fun showViewSuccess() {
         binding.successLinearLayout.visibility = VISIBLE
         binding.loadingFrameLayout.visibility = GONE
-        binding.errorLinearLayout.visibility = GONE
+        binding.cardViewItem.visibility = GONE
     }
 
     private fun showViewLoading() {
         binding.successLinearLayout.visibility = GONE
         binding.loadingFrameLayout.visibility = VISIBLE
-        binding.errorLinearLayout.visibility = GONE
+        binding.cardViewItem.visibility = GONE
     }
 
     private fun showViewError() {
         binding.successLinearLayout.visibility = GONE
         binding.loadingFrameLayout.visibility = GONE
-        binding.errorLinearLayout.visibility = VISIBLE
+        binding.cardViewItem.visibility = VISIBLE
     }
 
     companion object {
