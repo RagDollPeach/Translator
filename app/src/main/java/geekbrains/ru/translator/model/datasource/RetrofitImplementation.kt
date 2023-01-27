@@ -12,6 +12,6 @@ class RetrofitImplementation : DataSource<List<DataModel>> {
     }
 
     private fun getService(interceptor: Interceptor): ApiService {
-        return App.createRetrofit(interceptor).create(ApiService::class.java)
+        return App.getMyApp().createRetrofit(interceptor).create(ApiService::class.java)
     }
 }

@@ -5,6 +5,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import geekbrains.ru.translator.model.data.AppState
 import geekbrains.ru.translator.presenter.MainPresenterImpl
 import geekbrains.ru.translator.presenter.Presenter
+import geekbrains.ru.translator.utils.BASE_URL_LOCATIONS
 import geekbrains.ru.translator.view.base.View
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -32,22 +33,21 @@ class App : Application() {
         private var myApplication: App? = null
         fun getMyApp() = myApplication!!
 
-        private const val BASE_URL_LOCATIONS = "https://dictionary.skyeng.ru/api/public/v1/"
+    }
 
-        fun createRetrofit(interceptor: Interceptor): Retrofit {
-            return Retrofit.Builder()
-                .baseUrl(BASE_URL_LOCATIONS)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(createOkHttpClient(interceptor))
-                .build()
-        }
+    fun createRetrofit(interceptor: Interceptor): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL_LOCATIONS)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(createOkHttpClient(interceptor))
+            .build()
+    }
 
-        private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {
-            val httpClient = OkHttpClient.Builder()
-            httpClient.addInterceptor(interceptor)
-            httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            return httpClient.build()
-        }
+    private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor(interceptor)
+        httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        return httpClient.build()
     }
 }
